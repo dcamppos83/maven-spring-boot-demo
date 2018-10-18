@@ -101,7 +101,8 @@ spec:
             }
             steps {
                 container('maven') {
-                    sh 'mvn compile jib:build -Djib.to.auth.username=${DHUB_USR} -Djib.to.auth.password=${DHUB_PSW}'
+                    // we should never come here if the tests have not run, as we run verify before
+                    sh 'mvn compile jib:build -Djib.to.auth.username=${DHUB_USR} -Djib.to.auth.password=${DHUB_PSW} -DskipTests'
                 }
             }
         }
