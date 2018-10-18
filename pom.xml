@@ -91,7 +91,7 @@
                 <version>0.9.11</version>
                 <configuration>
                     <to>
-                        <image>registry.hub.docker.com/demomon/maven-spring-demo</image>
+                        <image>registry.hub.docker.com/demomon/maven-spring-demo:${project.version}</image>
                     </to>
                 </configuration>
             </plugin>
