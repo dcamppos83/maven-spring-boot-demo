@@ -26,6 +26,11 @@ spec:
     command:
     - cat
     tty: true
+  - name: maven2
+    image: maven:3-jdk-11-slim
+    command:
+    - cat
+    tty: true    
 """
         }
     }
@@ -100,7 +105,7 @@ spec:
                 DHUB=credentials('dockerhub')
             }
             steps {
-                container('maven') {
+                container('maven2') {
                     // we should never come here if the tests have not run, as we run verify before
                     sh 'mvn compile jib:build -Djib.to.auth.username=${DHUB_USR} -Djib.to.auth.password=${DHUB_PSW} -DskipTests'
                 }
