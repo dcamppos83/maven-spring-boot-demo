@@ -1,0 +1,7 @@
+organization=demomon
+projectKey=spring-maven-demo
+serverUrl=https://sonarcloud.io
+serverVersion=7.4.0.18036
+dashboardUrl=https://sonarcloud.io/dashboard?id=spring-maven-demo
+ceTaskId=AWaHfRShkffOU2jHqOON
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWaHfRShkffOU2jHqOON
