@@ -22,7 +22,7 @@ metadata:
 spec:
   containers:
   - name: maven
-    image: maven:3-jdk-11
+    image: maven:3-jdk-11-slim
     command:
     - cat
     tty: true
