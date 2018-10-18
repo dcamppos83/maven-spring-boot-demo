@@ -1,4 +1,4 @@
-package com.github.joostvdg.demo.mavenspringdemo;
+package com.github.demomon.mavenspringdemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

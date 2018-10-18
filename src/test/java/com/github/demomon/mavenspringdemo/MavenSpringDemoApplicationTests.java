@@ -1,4 +1,4 @@
-package com.github.joostvdg.demo.mavenspringdemo;
+package com.github.demomon.mavenspringdemo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
