@@ -26,11 +26,6 @@ spec:
     command:
     - cat
     tty: true
-  - name: maven2
-    image: maven:3-jdk-11-slim
-    command:
-    - cat
-    tty: true    
 """
         }
     }
@@ -105,9 +100,15 @@ spec:
                 DHUB=credentials('dockerhub')
             }
             steps {
-                container('maven2') {
+                container('maven') {
                     // we should never come here if the tests have not run, as we run verify before
-                    sh 'mvn compile jib:build -Djib.to.auth.username=${DHUB_USR} -Djib.to.auth.password=${DHUB_PSW} -DskipTests'
+
+                    // TODO: do we need to compile before jib?
+                    // TODO: if not, and we can reusue what we have, that saves time
+                    // however, currently we get exit '143', this means something crashes
+                    // perhaps doing a clean and then compile solves it
+                    // if not, try without compiling and reusing what came out of verify
+                    sh 'mvn clean compile jib:build -Djib.to.auth.username=${DHUB_USR} -Djib.to.auth.password=${DHUB_PSW} -DskipTests'
                 }
             }
         }
