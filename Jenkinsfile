@@ -26,6 +26,11 @@ spec:
     command:
     - cat
     tty: true
+  - name: jpb
+    image: caladreas/jpb
+    command:
+    - cat
+    tty: true    
 """
         }
     }
@@ -109,6 +114,14 @@ spec:
                     // perhaps doing a clean and then compile solves it
                     // if not, try without compiling and reusing what came out of verify
                     sh 'mvn clean compile jib:build -Djib.to.auth.username=${DHUB_USR} -Djib.to.auth.password=${DHUB_PSW} -DskipTests'
+                }
+            }
+        }
+        stage('Something') {
+            steps {
+                container('jpb') {
+                    // just trying to see if this saves us from error 143
+                    echo 'Hello'
                 }
             }
         }
