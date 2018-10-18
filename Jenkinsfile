@@ -26,11 +26,13 @@ spec:
     command:
     - cat
     tty: true
-  - name: jpb
-    image: caladreas/jpb
-    command:
-    - cat
-    tty: true    
+    resources:
+      limits:
+        cpu: 1
+        memory: 1Gi
+      requests:
+        cpu: 0.5
+        memory: 500Mi
 """
         }
     }
