@@ -77,7 +77,6 @@ spec:
                     when {branch 'master'}
                     environment {
                         SONAR_HOST='https://sonarcloud.io'
-                        PROJECT='spring-maven-demo'
                         KEY='spring-maven-demo'
                         ORG='demomon'
                         SONAR_TOKEN=credentials('sonarcloud')
@@ -86,7 +85,7 @@ spec:
                         container('maven') {
                             sh '''mvn sonar:sonar \
                               -Dsonar.projectKey=${KEY} \
-                              -Dsonar.organization=${PROJECT} \
+                              -Dsonar.organization=${ORG} \
                               -Dsonar.host.url=${SONAR_HOST} \
                               -Dsonar.login=${SONAR_TOKEN}
                             '''
