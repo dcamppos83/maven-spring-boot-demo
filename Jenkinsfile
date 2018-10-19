@@ -87,12 +87,14 @@ spec:
                     }
                     steps {
                         container('maven') {
-                            sh '''mvn sonar:sonar \
-                              -Dsonar.projectKey=${KEY} \
-                              -Dsonar.organization=${ORG} \
-                              -Dsonar.host.url=${SONAR_HOST} \
-                              -Dsonar.login=${SONAR_TOKEN}
-                            '''
+                            echo "HelloWorld"
+                            // TODO: re-enable
+//                            sh '''mvn sonar:sonar \
+//                              -Dsonar.projectKey=${KEY} \
+//                              -Dsonar.organization=${ORG} \
+//                              -Dsonar.host.url=${SONAR_HOST} \
+//                              -Dsonar.login=${SONAR_TOKEN}
+//                            '''
                         }
                     }
                 }
