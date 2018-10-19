@@ -29,10 +29,10 @@ spec:
     resources:
       limits:
         cpu: 1
-        memory: 1Gi
+        memory: 2Gi
       requests:
-        cpu: 0.5
-        memory: 500Mi
+        cpu: 1
+        memory: 2Gi
 """
         }
     }
