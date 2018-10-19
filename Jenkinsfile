@@ -26,13 +26,6 @@ spec:
     command:
     - cat
     tty: true
-    resources:
-      limits:
-        cpu: 1
-        memory: 2Gi
-      requests:
-        cpu: 1
-        memory: 2Gi
 """
         }
     }
