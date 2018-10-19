@@ -5,7 +5,7 @@ pipeline {
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '5', artifactNumToKeepStr: '5', daysToKeepStr: '5', numToKeepStr: '5')
         durabilityHint 'PERFORMANCE_OPTIMIZED'
-        timeout(5)
+        timeout(15)
     }
     libraries {
         lib('jenkins-pipeline-library@master')
@@ -56,7 +56,7 @@ spec:
         stage('Build') {
             steps {
                 container('maven') {
-                    sh 'mvn clean verify'
+                    sh 'mvn clean verify -B -e'
                 }
             }
         }
@@ -87,14 +87,12 @@ spec:
                     }
                     steps {
                         container('maven') {
-                            echo "HelloWorld"
-                            // TODO: re-enable
-//                            sh '''mvn sonar:sonar \
-//                              -Dsonar.projectKey=${KEY} \
-//                              -Dsonar.organization=${ORG} \
-//                              -Dsonar.host.url=${SONAR_HOST} \
-//                              -Dsonar.login=${SONAR_TOKEN}
-//                            '''
+                            sh '''mvn sonar:sonar \
+                              -Dsonar.projectKey=${KEY} \
+                              -Dsonar.organization=${ORG} \
+                              -Dsonar.host.url=${SONAR_HOST} \
+                              -Dsonar.login=${SONAR_TOKEN}
+                            '''
                         }
                     }
                 }
@@ -106,14 +104,9 @@ spec:
                 DHUB=credentials('dockerhub')
             }
             steps {
-                // TODO: cleanup git
-                // TODO: checkout new tag
-                dir('temp') {
-                    checkout scm
-                    container('maven') {
-                        // we should never come here if the tests have not run, as we run verify before
-                        sh 'mvn clean compile jib:build -Djib.to.auth.username=${DHUB_USR} -Djib.to.auth.password=${DHUB_PSW} -DskipTests'
-                    }
+                container('maven') {
+                    // we should never come here if the tests have not run, as we run verify before
+                    sh 'mvn clean compile -B -e jib:build -Djib.to.auth.username=${DHUB_USR} -Djib.to.auth.password=${DHUB_PSW} -DskipTests'
                 }
             }
         }
