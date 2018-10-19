@@ -108,7 +108,8 @@ spec:
                     // however, currently we get exit '143', this means something crashes
                     // perhaps doing a clean and then compile solves it
                     // if not, try without compiling and reusing what came out of verify
-                    sh 'mvn clean compile jib:build -Djib.to.auth.username=${DHUB_USR} -Djib.to.auth.password=${DHUB_PSW} -DskipTests'
+                    // clean compile
+                    sh 'mvn jib:build -Djib.to.auth.username=${DHUB_USR} -Djib.to.auth.password=${DHUB_PSW} -DskipTests'
                 }
             }
         }
