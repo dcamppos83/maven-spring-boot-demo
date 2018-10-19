@@ -5,7 +5,7 @@
 
 	<groupId>com.github.demomon</groupId>
 	<artifactId>maven-spring-demo</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1.14</version>
 	<packaging>jar</packaging>
 
 	<name>maven-spring-demo</name>
