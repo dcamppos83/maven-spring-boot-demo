@@ -1,4 +1,5 @@
 def scmVars
+def tag
 
 pipeline {
     options {
@@ -67,6 +68,9 @@ spec:
                         NEW_VERSION = gitNextSemverTagMaven('pom.xml')
                     }
                     steps {
+                        script {
+                            tag = "${NEW_VERSION}"
+                        }
                         container('maven') {
                             sh 'mvn versions:set -DnewVersion=${NEW_VERSION}'
                         }
@@ -100,24 +104,12 @@ spec:
                 DHUB=credentials('dockerhub')
             }
             steps {
+                // TODO: cleanup git
+                // TODO: checkout new tag
+                sh 'git clean -f -d -X'
                 container('maven') {
                     // we should never come here if the tests have not run, as we run verify before
-
-                    // TODO: do we need to compile before jib?
-                    // TODO: if not, and we can reusue what we have, that saves time
-                    // however, currently we get exit '143', this means something crashes
-                    // perhaps doing a clean and then compile solves it
-                    // if not, try without compiling and reusing what came out of verify
-                    // clean compile
-                    sh 'mvn jib:build -Djib.to.auth.username=${DHUB_USR} -Djib.to.auth.password=${DHUB_PSW} -DskipTests'
-                }
-            }
-        }
-        stage('Something') {
-            steps {
-                container('jpb') {
-                    // just trying to see if this saves us from error 143
-                    echo 'Hello'
+                    sh 'mvn clean compile jib:build -Djib.to.auth.username=${DHUB_USR} -Djib.to.auth.password=${DHUB_PSW} -DskipTests'
                 }
             }
         }
