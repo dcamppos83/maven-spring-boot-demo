@@ -8,7 +8,8 @@ pipeline {
         timeout(15)
     }
     libraries {
-        lib('jenkins-pipeline-library@master')
+        lib('core@master')
+        lib('maven@master')
     }
     agent {
         kubernetes {
